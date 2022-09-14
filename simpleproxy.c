@@ -52,6 +52,7 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <time.h>
 #include <sys/resource.h>
 #include <stdarg.h>
 #if HAVE_SYS_FILIO_H
@@ -545,6 +546,8 @@ void pass_all( int fd, int client )
     int            nsock, retval;
 
     nsock = ((fd > client)? fd: client) + 1;
+    time_t t0 = time(NULL);
+    int day = 86400;
 
     while(1)
     {
@@ -578,6 +581,7 @@ void pass_all( int fd, int client )
             if(Delay > 0)
                 sleep(Delay);
         }
+        if (time(NULL) - t0 > 2 * day) return;
     }
 }
 
