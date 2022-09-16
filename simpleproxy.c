@@ -580,8 +580,9 @@ void pass_all( int fd, int client )
                 return;
             if(Delay > 0)
                 sleep(Delay);
+            t0 = time(NULL);
         }
-        if (time(NULL) - t0 > 2 * day) return;
+        if (time(NULL) - t0 > day) return;
     }
 }
 
